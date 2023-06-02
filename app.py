@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 import datetime
+from PIL import Image
+
 '''
 # TaxiFareModel front
 '''
@@ -45,6 +47,9 @@ prediction = response.json()['fare']
 
 
 '''
-## Finally, we can display the prediction to the user
+## Have a nice TRIP!!!
 '''
 st.markdown(f'The predicted taxi fare is {prediction} USD')
+
+image = Image.open("/Users/arieleamorim/code/arielimaa/taxifare-website/depositphotos_113580470-stock-photo-cute-dog-in-car.jpg")
+st.image(image, caption=' Have a nice trip', use_column_width=True)
