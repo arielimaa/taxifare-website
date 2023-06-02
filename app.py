@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 import folium
-
+import datetime
 '''
 # TaxiFareModel front
 '''
@@ -29,7 +29,7 @@ passenger_count = st.number_input("Passenger Count", min_value=1, step=1)
 ## Once we have these, let's call our API in order to retrieve a prediction
 
 url = 'https://taxifare.lewagon.ai/predict'
-
+datetime_var= datetime.datetime.combine(date_time, time)
 
 # Build the parameters dictionary for API
 params = {
@@ -41,19 +41,11 @@ params = {
     "passenger_count": passenger_count
 }
 
+response = requests.get(url, params=params)
+prediction = response.json()['fare']
 
-@st.cache
-def get_prediction(params):
-    # Call the API and retrieve the prediction
-    response = requests.get(url, params=params)
-    data = response.json()
-    prediction = data['prediction']
-    return prediction
-
-# Call the API and retrieve the prediction (cached if inputs are the same)
-prediction = get_prediction(params)
 
 '''
 ## Finally, we can display the prediction to the user
 '''
-st.success(f'The predicted taxi fare is {prediction} USD')
+st.markdown(f'The predicted taxi fare is {prediction} USD')
