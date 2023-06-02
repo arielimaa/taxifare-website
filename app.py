@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import folium
 import datetime
 '''
 # TaxiFareModel front
